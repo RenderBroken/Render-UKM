@@ -3,6 +3,14 @@ cat << CTAG
 	name:STATUS,
 		elements:[
 			{ SPane:{
+				title:"CPU PVS/SPEED Level:"
+			}},
+				{ SLiveLabel:{
+					refresh:10000,
+					style:italic,
+					action:"live CpuPvsLevel"
+			}},
+			{ SPane:{
 				title:"Battery Temperature:"
 			}},
 				{ SLiveLabel:{

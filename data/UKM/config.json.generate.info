@@ -82,33 +82,6 @@ cat << CTAG
 				},
 				description:"`getprop ro.build.date`"
 			}},
-			{ STitleBar:{
-				title:{
-					en:"SOC Binning",
-					es:"SOC Binning"
-				}
-			}},
-				{ SDescription:{
-					description:"ACPU PVS:`$BB cat $UKM/debug/pvs_bin`"
-				}},
-				{ SDescription:{
-					description:"The higher value of the binning, the lower voltages your device can run."
-				}},
-				{ SDescription:{
-					description:"SPEED BIN:`$BB cat $UKM/debug/speed_bin`"
-				}},
-				{ SDescription:{
-					description:"The higher value of the speed, the higher frequencies your device can run."
-				}},
-			{ STitleBar:{
-				title:{
-					en:"Last KMSG",
-					es:"Ultimo KMSG"
-				}
-			}},
-				{ SDescription:{
-					description:"`$BB cat $UKM/debug/last_kmsg`"
-				}},
 		]
 }
 CTAG

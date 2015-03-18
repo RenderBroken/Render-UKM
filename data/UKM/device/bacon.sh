@@ -15,12 +15,6 @@ case "$1" in
 			$BB echo "\"$CPUGOV\",";
 		done;
 	;;
-	DebugPVS)
-		$BB echo "PVS bin";
-	;;
-	DebugSPEED)
-		$BB echo "Speed bin";
-	;;
 	DefaultCPUGovernor)
 		$BB echo `$BB cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
 	;;
@@ -385,6 +379,9 @@ case "$1" in
 		if [ -n "$setstate" ]; then
 			$BB echo -ne "\x$setstate" | $BB dd obs=1 count=1 seek=$offset of=$block 2> /dev/null;
 		fi;
+	;;
+		LiveCpuPvsLevel)
+			$BB echo "Pvs Bin: `$BB cat /sys/module/clock_krait_8974/parameters/pvs_level`@nSpeed Bin: `$BB cat /sys/module/clock_krait_8974/parameters/speed_level`"
 	;;
 	LiveChargeCurrent)
 		$BB echo "mA: `$BB cat /sys/kernel/charge_levels/charge_info`"
