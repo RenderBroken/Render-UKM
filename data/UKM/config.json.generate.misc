@@ -13,44 +13,6 @@ cat << CTAG
 						`sh $DEVICE TCPCongestionList`
 					]
 				}},
-			`if [ -d "/sys/kernel/power_suspend" ]; then
-				$BB echo '{ SPane:{
-					title:"Power Suspend"
-				}},'
-				if [ -f "/sys/kernel/power_suspend/power_suspend_mode" ]; then
-				PSM=\`$BB cat /sys/kernel/power_suspend/power_suspend_mode\`
-					$BB echo '{ SOptionList:{
-						title:"Power Suspend Mode",
-						description:"Kernel Mode, LCD Hooks & Highest Level Hook are automatic and managed by the kernel, to manually enable or disable the Power Suspend State choose User Mode.",
-						default:'$PSM',
-						action:"generic /sys/kernel/power_suspend/power_suspend_mode",
-						values:{
-							0:"Kernel Mode", 1:"User Mode", 2:"LCD Hooks", 3:"Highest Level Hook"
-						}
-					}},'
-				fi
-				if [ -f "/sys/kernel/power_suspend/power_suspend_state" ] && [ "\`$BB grep 1.2 /sys/kernel/power_suspend/power_suspend_version\`" ]; then
-				PSS=\`$BB cat /sys/kernel/power_suspend/power_suspend_state\`
-					$BB echo '{ SCheckBox:{
-						label:"Power Suspend State",
-						description:"Kernel power management driver when screen is off. Better battery savings if enabled. Note: You can only change this setting if Power Suspend Mode is in User Mode.",
-						default:'$PSS',
-						action:"powersuspend /sys/kernel/power_suspend/power_suspend_state"
-					}},'
-				fi
-				if [ -f "/sys/kernel/power_suspend/power_suspend_state" ] && [ "\`$BB grep 1.3 /sys/kernel/power_suspend/power_suspend_version\`" ]; then
-				PSS=\`$BB cat /sys/kernel/power_suspend/power_suspend_state\`
-					$BB echo '{ SSeekBar:{
-						title:"Power Suspend State",
-						description:"Kernel power management driver when screen is off. Better battery savings if enabled. Note: You can only change this setting if Power Suspend Mode is in User Mode.",
-						min:0,
-						max:2,
-						step:1,
-						default:'$PSS',
-						action:"powersuspend /sys/kernel/power_suspend/power_suspend_state"
-					}},'
-				fi
-			fi`
 			`if [ -f "/sys/module/sync/parameters/fsync_enabled" ]; then
 			FSYNC=\`bool /sys/module/sync/parameters/fsync_enabled\`
 				$BB echo '{ SPane:{
@@ -184,6 +146,37 @@ cat << CTAG
 							done;
 						$BB echo '}
 					}},'
+			fi`
+			`if [ -d "/sys/kernel/charge_levels/" ]; then
+				$BB echo '{ SPane:{
+					title:"Charge Levels",
+				}},'
+				if [ -f "/sys/kernel/charge_levels/charge_level_ac" ]; then
+				ACCL=\`$BB cat /sys/kernel/charge_levels/charge_level_ac\`
+					$BB echo '{ SSeekBar:{
+						title:"AC Charge Level",
+						description:"Set MAX mA allowed while charging via AC Adapter.",
+						unit:" mA",
+						min:100,
+						max:2200,
+						step:100,
+						default:'$ACCL',
+						action:"generic /sys/kernel/charge_levels/charge_level_ac"
+						}},'
+				fi
+				if [ -f "/sys/kernel/charge_levels/charge_level_usb" ]; then
+				USBCL=\`$BB cat /sys/kernel/charge_levels/charge_level_usb\`
+					$BB echo '{ SSeekBar:{
+						title:"USB Charge Level",
+						description:"Set MAX mA allowed while charging via USB.",
+						unit:" mA",
+						min:0,
+						max:500,
+						step:100,
+						default:'$USBCL',
+						action:"generic /sys/kernel/charge_levels/charge_level_usb"
+						}},'
+				fi
 			fi`
 			`if [ -f "/sys/module/msm_otg/parameters/otg_hack_enable" ]; then
 			OTG=\`$BB cat /sys/module/msm_otg/parameters/otg_hack_enable\`
