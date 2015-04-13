@@ -361,6 +361,19 @@ cat << CTAG
 								action:"generic /sys/module/cpu_boost/parameters/input_boost_ms"
 						}},'
 					fi
+					if [ -f "/sys/module/cpu_boost/parameters/min_input_interval" ]; then
+					MBOOSTINT=\`$BB cat /sys/module/cpu_boost/parameters/min_input_interval\`
+						$BB echo '{ SSeekBar:{
+								title:"Min Input Interval",
+								description:"Minimum Input Interval between touches.",
+								unit:" ms",
+								min:100,
+								max:1500,
+								step:10,
+								default:'$MBOOSTINT',
+								action:"generic /sys/module/cpu_boost/parameters/min_input_interval"
+						}},'
+					fi
 					if [ -f "/sys/module/cpu_boost/parameters/input_boost_freq" ]; then
 					
 					VALUE=0; for i in \`$BB cat /sys/module/cpu_boost/parameters/input_boost_freq\`; do VALUE=$(($VALUE+1)); done;
