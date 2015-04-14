@@ -519,8 +519,9 @@ cat << CTAG
 				title:"CPU Governor",
 				description:"The CPU governor determines how the CPU behaves in response to changes in workload. More info: <a href='http://timos.me/tm/wiki/cpugovernors'>HERE</a>"
 			}},
-				`if [ ! -f "$LIMITER/scaling_governor_0" ] && [ ! -f "/sys/devices/system/cpu/cpufreq/all_cpus/scaling_governor_all_cpus" ]; then
+				`if [ -f "$LIMITER/scaling_governor_0" ] && [ ! -f "/sys/devices/system/cpu/cpufreq/all_cpus/scaling_governor_all_cpus" ]; then
 					$BB echo '{ SOptionList:{
+						title:"Change Governor for all CPUs (one click)",
 						default:'\`sh $DEVICE DefaultCPUGovernor\`',
 						action:"cpuset '\`sh $DEVICE DirCPUGovernor\`'",
 						values:['
@@ -539,7 +540,8 @@ cat << CTAG
 							}
 						]
 					}},'
-				elif [ -f "$LIMITER/scaling_governor_0" ]; then
+				fi`
+				`if [ -f "$LIMITER/scaling_governor_0" ]; then
 					$BB echo '{ SOptionList:{
 						title:"CPU0 (MSM Limiter)",
 						default:'\`sh $DEVICE DefaultCPUGovernor\`',
@@ -620,7 +622,8 @@ cat << CTAG
 							}
 						]
 					}},'
-				elif [ -f "/sys/devices/system/cpu/cpufreq/all_cpus/scaling_governor_all_cpus" ]; then
+				fi`
+				`if [ -f "/sys/devices/system/cpu/cpufreq/all_cpus/scaling_governor_all_cpus" ]; then
 					$BB echo '{ SOptionList:{
 						title:"CPU0 (All CPUs)",
 						default:'\`sh $DEVICE DefaultCPUGovernor\`',
