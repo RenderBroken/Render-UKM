@@ -126,7 +126,7 @@ case "$1" in
 		else
 			cd $SYNAPSE_DATA;
 			$BB echo "None" > $UKM/files/bck_prof;
-			$BB tar -cZ -f "$SYNAPSE_PROFILE_DIR/$BCK_PROF.tgz" *;
+			$BB tar -c -f "$SYNAPSE_PROFILE_DIR/$BCK_PROF.tgz" *;
 			$BB echo "$BCK_PROF.tgz created. Press the Restart Synapse button below to see updated list.";
 		fi;
 	;;
