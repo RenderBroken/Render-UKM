@@ -96,7 +96,7 @@ cat << CTAG
 						unit:" kB",
 						step:50,
 						min:0,
-						max:20000,
+						max:30000,
 						default:'\`$BB cat /proc/sys/vm/extra_free_kbytes\`',
 						action:"generic /proc/sys/vm/extra_free_kbytes"
 					}},'
