@@ -15,6 +15,17 @@ cat << CTAG
 					action:"live CPUFrequency"
 				}},'
 			fi`
+			`if [ -d "$LIMITER" ]; then
+				$BB echo '{ SPane:{
+					title:"Scaling Frequencies",
+				}},
+				{ SLiveLabel:{
+					title:"Scaling Frequencies",
+					description: "Scaling max-min frequencies are affected by thermal engine/driver, mpdecision hotplug driver and CPU Boost driver.",
+					refresh:1000,
+					action:"live SCALINGFREQ"
+				}},'
+			fi`
 			{ STitleBar:{
 				title:"CPU Frequency Scaling"
 			}},
