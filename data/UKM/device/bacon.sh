@@ -365,4 +365,7 @@ case "$1" in
 			$BB echo -ne "\x$setstate" | $BB dd obs=1 count=1 seek=$offset of=$block 2> /dev/null;
 		fi;
 	;;
+	LiveChargeCurrent)
+		$BB echo "mA: `$BB cat /sys/kernel/charge_levels/charge_info`"
+	;;
 esac;
