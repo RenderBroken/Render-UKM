@@ -8,6 +8,14 @@ cat << CTAG
 				action:"echo 'DEVICE NOT SUPPORTED'"
 			}},
 			{ SPane:{
+				title:"Disclaimer and Fixing",
+				description:"To update/refresh UKM, select Fix Device Not Supported below, if it does not work, most likey your device is not supported."
+			}},
+			{ SButton:{
+					label:"Fix Device Not Supported",
+					action:"restorebackup restart"
+			}},
+			{ SPane:{
 				title:{
 					en:"General",
 					es:"General"
