@@ -386,4 +386,13 @@ case "$1" in
 	LiveChargeCurrent)
 		$BB echo "mA: `$BB cat /sys/kernel/charge_levels/charge_info`"
 	;;
+		LiveBrickedHotplug)
+			$BB echo "Bricked Hotplug Driver"
+	;;
+		LiveIntellidHotplug)
+			$BB echo "Intelli Hotplug Driver"
+	;;
+		LivedMsmHotplug)
+			$BB echo "Msm Hotplug Driver"
+	;;
 esac;

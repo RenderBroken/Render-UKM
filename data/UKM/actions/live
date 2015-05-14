@@ -60,4 +60,13 @@ case $1 in
 	CpuPvsLevel)
 		$BB echo `sh $DEVICE LiveCpuPvsLevel`;
 	;;
+	BrickedHotplug)
+		$BB echo `sh $DEVICE LiveBrickedHotplug`;
+	;;
+	IntellidHotplug)
+		$BB echo `sh $DEVICE LiveIntellidHotplug`;
+	;;
+	MsmHotplug)
+		$BB echo `sh $DEVICE LivedMsmHotplug`;
+	;;
 esac;
