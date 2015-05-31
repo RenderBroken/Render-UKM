@@ -27,18 +27,10 @@ cat << CTAG
 			$BB echo ','
 			. $UKM/config.json.generate.gpu
 			$BB echo ','
-			if [ -f "/sys/devices/platform/kcal_ctrl.0/kcal" -o -f "/sys/devices/platform/mipi_lgit.1537/kgamma_b" -o -f "/sys/class/misc/gammacontrol/brightness" -o -f "/sys/devices/i2c-0/0-0038/lm3530_br_mode" -o -f "/sys/module/msm_fb/parameters/backlight_dimmer" -o -f "/sys/devices/platform/mipi_lgit.1537/kgamma_blue" -o -f "/sys/module/dsi_panel/kgamma_bn" -o -d "/sys/devices/virtual/graphics/fb0" -o -f "/sys/module/panel_s6e8aa0/parameters/contrast" -o -f "/sys/devices/platform/omapdss/manager0/gamma" -o -f "/sys/class/backlight/s6e8aa0/acl_set" ]; then
-				. $UKM/config.json.generate.gamma
+			. $UKM/config.json.generate.gamma
 			$BB echo ','
-			fi
-			if [ -d "/sys/kernel/sound_control_3" -o -d "/sys/class/misc/soundcontrol" ]; then
-				. $UKM/config.json.generate.sound
+			. $UKM/config.json.generate.sound
 			$BB echo ','
-			fi
-			if [ -d "/sys/bus/i2c/devices/0-0058" ]; then
-				. $UKM/config.json.generate.speaker
-			$BB echo ','
-			fi
 			. $UKM/config.json.generate.mem
 			$BB echo ','
 			. $UKM/config.json.generate.wake
