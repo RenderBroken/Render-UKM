@@ -141,8 +141,8 @@ cat << CTAG
 					HB=\`$BB cat $SC/headset_boost\`;
 						$BB echo '{ SSeekBar:{
 							title:"Headset Boost",
-							min:-11,
-							max:11,
+							min:-20,
+							max:20,
 							default:'$HB',
 							action:"generic '$SC'/headset_boost",
 						}},'
@@ -151,8 +151,8 @@ cat << CTAG
 					MB=\`$BB cat $SC/mic_boost\`;
 						$BB echo '{ SSeekBar:{
 							title:"Microphone Boost",
-							min:-11,
-							max:11,
+							min:-20,
+							max:20,
 							default:'$MB',
 							action:"generic '$SC'/mic_boost",
 						}},'
@@ -171,8 +171,8 @@ cat << CTAG
 					SB=\`$BB cat $SC/speaker_boost\`;
 						$BB echo '{ SSeekBar:{
 							title:"Speaker Boost",
-							min:-11,
-							max:11,
+							min:-20,
+							max:20,
 							default:'$SB',
 							action:"generic '$SC'/speaker_boost",
 						}},'
@@ -181,22 +181,10 @@ cat << CTAG
 					VB=\`$BB cat $SC/volume_boost\`;
 						$BB echo '{ SSeekBar:{
 							title:"Volume Boost",
-							min:0,
+							min:-20,
 							max:20,
 							default:'$VB',
 							action:"generic '$SC'/volume_boost",
-						}},'
-					fi
-					if [ -f "$SC/highperf_enabled" ]; then
-					HPE=\`$BB cat $SC/highperf_enabled\`;
-						$BB echo '{ SPane:{
-						title:"High performance",
-						description:"Class AB mode for headphone 192Khz playback.",
-					}},
-						{ SCheckBox:{
-							label:"Enable",
-							default:'$HPE',
-							action:"generic '$SC'/highperf_enabled",
 						}},'
 					fi
 			fi`
