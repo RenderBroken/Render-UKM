@@ -106,7 +106,10 @@ case "$1" in
 				$BB chown $OWNER:$OWNER *;
 				$BB chmod $PERM *;
 				$BB echo "None" > $SYNAPSE_PROFILE_DIR/.selected_config_profile;
-				$BB echo "$SYNAPSE_PROFILE restored. Press the Restart Synapse button below to see updated list.";
+				reset_uci;
+				am force-stop com.af.synapse 2> /dev/null;
+				am start -a android.intent.action.MAIN -n com.af.synapse/.MainActivity 2> /dev/null;
+				$BB echo "$SYNAPSE_PROFILE restored.";
 			elif [ "$SYNAPSE_PROFILE" == "None" ]; then
 				$BB echo "None selected.";
 			else
@@ -491,9 +494,9 @@ case "$1" in
 	
 	restart)
 		am force-stop com.af.synapse 2> /dev/null;
-		$BB sleep 1;
+		$BB usleep 100000;
 		reset_uci;
-		$BB sleep 1;
+		$BB usleep 100000;
 		am start -a android.intent.action.MAIN -n com.af.synapse/.MainActivity 2> /dev/null;
 	;;
 esac;
