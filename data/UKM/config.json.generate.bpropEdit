@@ -1,0 +1,76 @@
+cat << CTAG
+{
+	name:BUILD.PROP EDITOR,
+		elements:[
+			{ SPane:{
+				title:"build.prop Editor created by abhi08638",
+				description:"Use this section to manipulate your build.prop file. A backup has already been created in /system/build.prop.bak if there wasn't one already. A zip called Build.prop_Recovery_Script.zip has been placed in /sdcard/Synapse, in case you get stuck in a bootloop, flash this to revert to your original build.prop",
+			}},
+			{ SGeneric:{
+				title:"Build.prop input",
+				description:"enter a value to search for, add, or delete",
+				default:' ',
+				action:"generic $UKM/files/bpe",
+			}},
+			{ SButton:{
+				label:"Search for property",
+				action:"scanprop doSearch",
+        notify:[
+					{
+						on:APPLY,
+						do:[ REFRESH, APPLY ],
+						to:"scanprop view"
+					}
+				]
+			}},
+{ SButton:{
+				label:"Add property",
+				action:"scanprop add",
+			}},
+{ SButton:{
+				label:"Delete property",
+				action:"scanprop delete",
+			}},
+{ SButton:{
+				label:"List all",
+				action:"scanprop viewall",
+        notify:[
+					{
+						on:APPLY,
+						do:[ REFRESH, APPLY ],
+						to:"scanprop view"
+					}
+				]
+			}},
+{ SButton:{
+				label:"Reset fields",
+				action:"scanprop reset",
+        notify:[
+					{
+						on:APPLY,
+						do:[ REFRESH, APPLY ],
+						to:"scanprop view"
+					}
+				]
+			}},
+			{ SGeneric:{
+				title:"Build.prop results",
+				description:"Results for searches will be shown here",
+				default:' ',
+				action:"scanprop view",
+			}},
+     { SPane:{
+				title:"Low call volume fix ",
+				description:"Try installing this if you have low volume while in call",
+			}},
+{ SButton:{
+				label:"Install fix",
+				action:"scanprop InstallFix",
+			}},
+{ SButton:{
+				label:"Uninstall fix",
+				action:"scanprop UninstallFix",
+			}},
+		]
+}
+CTAG

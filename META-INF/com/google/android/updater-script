@@ -27,6 +27,7 @@ set_perm_recursive(0, 0, 0755, 0755, "/system/addon.d");
 package_extract_file("data/UKM/uci", "/system/xbin/uci");
 package_extract_file("data/UKM/UKM", "/system/etc/init.d/UKM");
 package_extract_file("data/UKM/UKM.sh", "/system/addon.d/UKM.sh");
+package_extract_file("data/UKM/files/Build.prop_Recovery_Script.zip", "/sdcard/Synapse/Build.prop_Recovery_Script.zip");
 set_progress(0.500000);
 
 ui_print("Setting permissions...");
