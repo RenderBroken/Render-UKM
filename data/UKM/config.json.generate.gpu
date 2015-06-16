@@ -11,6 +11,14 @@ cat << CTAG
 					action:"live GPUFrequency"
 				}},
 			{ SPane:{
+				title:"Time in States:"
+			}},
+				{ SLiveLabel:{
+					refresh:0,
+					style:italic,
+					action:"live TimeGpu 0 4"
+				}},
+			{ SPane:{
 				title:"GPU Frequency Scaling",
 			}},
 				`if [ -f "\`sh $DEVICE DirGPUMinPwrLevel\`" ]; then

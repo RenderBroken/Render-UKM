@@ -42,6 +42,9 @@ case $1 in
 	Time)
 		$BB echo `sh $DEVICE LiveTime $2 $3`;
 	;;
+	TimeGpu)
+		$BB echo `sh $DEVICE LiveTimeGpu $2 $3`;
+	;;
 	UpTime)
 		$BB echo `sh $DEVICE LiveUpTime`;
 	;;

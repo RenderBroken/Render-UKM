@@ -223,6 +223,27 @@ case "$1" in
 		STATE=${STATE%??};
 		$BB echo "$STATE";
 	;;
+	LiveTimeGpu)
+		STATE="";
+		CNT=0;
+		SUM=`$BB awk '{s+=$2} END {print s}' /sys/devices/fdb00000.qcom,kgsl-3d0/devfreq/fdb00000.qcom,kgsl-3d0/time_in_state`;
+
+		while read FREQ TIME; do
+			if [ "$CNT" -ge $2 ] && [ "$CNT" -le $3 ]; then
+				FREQ="$((FREQ / 1000)) MHz:";
+				if [ $TIME -ge "100" ]; then
+					PERC=`$BB awk "BEGIN { print ( ($TIME / $SUM) * 100) }"`;
+					PERC="`$BB printf "%0.1f\n" $PERC`%";
+					TIME=$((TIME / 100));
+					STATE="$STATE $FREQ `$BB echo - | $BB awk -v "S=$TIME" '{printf "%dh:%dm:%ds",S/(60*60),S%(60*60)/60,S%60}'` ($PERC)@n";
+				fi;
+			fi;
+			CNT=$((CNT+1));
+		done < /sys/devices/fdb00000.qcom,kgsl-3d0/devfreq/fdb00000.qcom,kgsl-3d0/time_in_state;
+
+		STATE=${STATE%??};
+		$BB echo "$STATE";
+	;;
 	LiveUpTime)
 		TOTAL=`$BB awk '{ print $1 }' /proc/uptime`;
 		AWAKE=$((`$BB awk '{s+=$2} END {print s}' /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state` / 100));
