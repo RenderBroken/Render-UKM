@@ -22,7 +22,7 @@ cat << CTAG
 				title:"Time in States:"
 			}},
 				{ SLiveLabel:{
-					refresh:0,
+					refresh:5000,
 					style:italic,
 					action:"live TimeGpu 0 4"
 				}},
