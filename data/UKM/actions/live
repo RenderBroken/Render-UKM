@@ -51,6 +51,9 @@ case $1 in
 	UnUsed)
 		$BB echo `sh $DEVICE LiveUnUsed`;
 	;;
+	UnUsedGpu)
+		$BB echo `sh $DEVICE LiveUnUsedGpu`;
+	;;
 	WakelocksKernel)
 		$BB echo `sh $DEVICE LiveWakelocksKernel`;
 	;;

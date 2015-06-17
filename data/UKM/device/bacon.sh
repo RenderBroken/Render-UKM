@@ -224,11 +224,11 @@ case "$1" in
 
 		while read FREQ TIME; do
 			if [ "$CNT" -ge $2 ] && [ "$CNT" -le $3 ]; then
-				FREQ="$((FREQ / 1000)) MHz:";
+				FREQ="$((FREQ / 1000000)) MHz:";
 				if [ $TIME -ge "100" ]; then
 					PERC=`$BB awk "BEGIN { print ( ($TIME / $SUM) * 100) }"`;
 					PERC="`$BB printf "%0.1f\n" $PERC`%";
-					TIME=$((TIME / 100));
+					TIME=$((TIME / 1000));
 					STATE="$STATE $FREQ `$BB echo - | $BB awk -v "S=$TIME" '{printf "%dh:%dm:%ds",S/(60*60),S%(60*60)/60,S%60}'` ($PERC)@n";
 				fi;
 			fi;
@@ -262,6 +262,18 @@ case "$1" in
 			fi;
 		done < /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state;
 		
+		UNUSED=${UNUSED%??};
+		$BB echo "$UNUSED";
+	;;
+	LiveUnUsedGpu)
+		UNUSED="";
+		while read FREQ TIME; do
+			FREQ="$((FREQ / 1000000)) MHz";
+			if [ $TIME -lt "1000" ]; then
+				UNUSED="$UNUSED$FREQ, ";
+			fi;
+		done < /sys/devices/fdb00000.qcom,kgsl-3d0/devfreq/fdb00000.qcom,kgsl-3d0/time_in_state;
+
 		UNUSED=${UNUSED%??};
 		$BB echo "$UNUSED";
 	;;

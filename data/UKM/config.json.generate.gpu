@@ -11,6 +11,14 @@ cat << CTAG
 					action:"live GPUFrequency"
 				}},
 			{ SPane:{
+				title:"Unused States:"
+			}},
+				{ SLiveLabel:{
+					refresh:0,
+					style:italic,
+					action:"live UnUsedGpu"
+			}},
+			{ SPane:{
 				title:"Time in States:"
 			}},
 				{ SLiveLabel:{
