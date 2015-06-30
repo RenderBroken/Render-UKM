@@ -79,8 +79,8 @@ cat << CTAG
 						$BB echo '{ SSeekBar:{
 							title:"'${CPUFREQ//mhz\:/}' MHz",
 							unit:"' ${UNIT}'",
-							min:500,
-							max:1400,
+							min:465,
+							max:1450,
 							step:1,
 							default:'$VOLT',
 							action:"voltage cpuvolt '${CPUFREQ}'"
