@@ -48,6 +48,18 @@ cat << CTAG
 							action:"boolean /sys/module/mmc_core/parameters/use_spi_crc"
 						}},'
 				fi`
+				`if [ -f "/sys/devices/msm_sdcc.1/mmc_host/mmc0/clk_scaling/scale_down_in_low_wr_load" ]; then
+				MMCC=\`$BB cat /sys/devices/msm_sdcc.1/mmc_host/mmc0/clk_scaling/scale_down_in_low_wr_load\`
+				$BB echo '{ SPane:{
+					title:"Memory Card Clock Scaling Control"
+				}},
+					{ SCheckBox:{
+						label:"MMC Clock Scaling Control",
+						description:"Optimize clock scaling during write requests. The default value for it is 0. In case we want to gain performance over power they should set it to 1.",
+						default:'$MMCC',
+						action:"generic /sys/devices/msm_sdcc.1/mmc_host/mmc0/clk_scaling/scale_down_in_low_wr_load"
+					}},'
+				fi`
 			{ SPane:{
 				title:"General I/O Tunables",
 				description:"Set the internal storage general tunables"
