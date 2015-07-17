@@ -491,24 +491,29 @@ cat << CTAG
 					}},'
 			fi`
 			`if [ -d "/sys/devices/virtual/graphics/fb0" ]; then
-				if [ -f "/sys/devices/virtual/graphics/fb0/panel_calibration" ]; then
-				PC=\`$BB cat /sys/devices/virtual/graphics/fb0/panel_calibration\`;
-				$BB echo '{ SPane:{
-					title:"Graphics"
-				}},
-					{ SGeneric:{
-						title:"Panel Calibration",
-						default:'$PC',
-						action:"generic /sys/devices/virtual/graphics/fb0/panel_calibration",
-					}},'
+				if [ -f "/sys/devices/virtual/graphics/fb0/sre" ]; then
+				SRE=\`$BB cat /sys/devices/virtual/graphics/fb0/sre\`
+						$BB echo '{ SSeekBar:{
+							title:"SRE Control Interface",
+							description:"Sunlight Readability Enhancement (0 disabled - 1 = Low / 2 = Medium / 3 = Strong ).",
+							min:0,
+							max:3,
+							step:1,
+							default:'$SRE',
+							action:"generic /sys/devices/virtual/graphics/fb0/sre"
+						}},'
 				fi
 				if [ -f "/sys/devices/virtual/graphics/fb0/cabc" ]; then
-				CABC=\`$BB cat /sys/devices/virtual/graphics/fb0/cabc\`;
-					$BB echo '{ SCheckBox:{
-						label:"CABC control",
-						default:'$CABC',
-						action:"generic /sys/devices/virtual/graphics/fb0/cabc"
-					}},'
+				CABC=\`$BB cat /sys/devices/virtual/graphics/fb0/cabc\`
+						$BB echo '{ SSeekBar:{
+							title:"CABC Control Interface",
+							description:"Sunlight Readability Enhancement (0 disabled - 1 = Ui Mode / 2 = Image Mode / 3 = Video Mode ).",
+							min:0,
+							max:3,
+							step:1,
+							default:'$CABC',
+							action:"generic /sys/devices/virtual/graphics/fb0/cabc"
+						}},'
 				fi
 				if [ -f "/sys/devices/virtual/graphics/fb0/color_enhance" ]; then
 				CE=\`$BB cat /sys/devices/virtual/graphics/fb0/color_enhance\`;
@@ -518,23 +523,12 @@ cat << CTAG
 						action:"generic /sys/devices/virtual/graphics/fb0/color_enhance"
 					}},'
 				fi
-				if [ -f "/sys/devices/virtual/graphics/fb0/sre" ]; then
-				SRE=\`$BB cat /sys/devices/virtual/graphics/fb0/sre\`;
+				if [ -f "/sys/devices/virtual/graphics/fb0/aco" ]; then
+				ACO=\`$BB cat /sys/devices/virtual/graphics/fb0/aco\`;
 					$BB echo '{ SCheckBox:{
-						label:"Sunlight readability enhancement",
-						default:'$SRE',
-						action:"generic /sys/devices/virtual/graphics/fb0/sre"
-					}},'
-				fi
-				if [ -f "/sys/devices/virtual/graphics/fb0/gamma" ]; then
-				GAMMAOPO=\`$BB cat /sys/devices/virtual/graphics/fb0/gamma\`;
-					$BB echo '{ SSeekBar:{
-							title:"Gamma Selection",
-							min:0,
-							max:3,
-							step:1,
-							default:'$GAMMAOPO',
-							action:"generic /sys/devices/virtual/graphics/fb0/gamma",
+						label:"Automatic Contrast Optimization",
+						default:'$ACO',
+						action:"generic /sys/devices/virtual/graphics/fb0/aco"
 					}},'
 				fi
 			fi`
