@@ -507,7 +507,7 @@ cat << CTAG
 				CABC=\`$BB cat /sys/devices/virtual/graphics/fb0/cabc\`
 						$BB echo '{ SSeekBar:{
 							title:"CABC Control Interface",
-							description:"Sunlight Readability Enhancement (0 disabled - 1 = Ui Mode / 2 = Image Mode / 3 = Video Mode ).",
+							description:"Content Adaptive Backlight Control (0 disabled - 1 = Ui Mode / 2 = Image Mode / 3 = Video Mode ).",
 							min:0,
 							max:3,
 							step:1,
