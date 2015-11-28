@@ -2,14 +2,16 @@ cat << CTAG
 {
 	name:STATUS,
 		elements:[
-			{ SPane:{
+			`if [ -f "/sys/module/clock_krait_8974/parameters/pvs_level"] && [ -f "/sys/module/clock_krait_8974/parameters/speed_level" ]; then
+			$BB echo '{ SPane:{
 				title:"CPU PVS/SPEED Level:"
 			}},
 				{ SLiveLabel:{
 					refresh:10000,
 					style:italic,
 					action:"live CpuPvsLevel"
-			}},
+				}},'
+			fi`
 			{ SPane:{
 				title:"Battery Temperature:"
 			}},
